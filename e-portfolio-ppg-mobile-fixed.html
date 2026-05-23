@@ -1,0 +1,2879 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>E-Portfolio PPG | Nama Mahasiswa</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ============================================================
+   DESIGN TOKENS — Light & Dark
+   ============================================================ */
+    :root {
+      /* BLUE PALETTE */
+      --blue-900: #022373;
+      --blue-800: #0a2e8a;
+      --blue-700: #1144c8;
+      --blue-600: #1a5cd4;
+      --blue-500: #2472e8;
+      --blue-400: #4b91f7;
+      --blue-300: #7ab4fb;
+      --blue-100: #dbeafe;
+      --blue-50: #eff6ff;
+      /* GOLD */
+      --gold: #e8aa20;
+      --gold-light: #f4ca5a;
+      --gold-pale: #fef9ec;
+      /* GRADIENT CORES */
+      --grad-hero: linear-gradient(135deg, #022373 0%, #1a5cd4 55%, #2d9fdb 100%);
+      --grad-section: linear-gradient(135deg, #1144c8 0%, #2472e8 100%);
+      --grad-gold: linear-gradient(135deg, #e8aa20, #f4ca5a);
+      --grad-card: linear-gradient(145deg, #1a5cd4 0%, #0a2e8a 100%);
+      /* SEMANTIC (Light) */
+      --bg: #f0f5ff;
+      --bg-card: #ffffff;
+      --bg-alt: #e8effd;
+      --surface: #ffffff;
+      --text-pri: #042060;
+      --text-sec: #3a5080;
+      --text-muted: #7190b8;
+      --border: #c5d6f5;
+      --shadow-sm: 0 2px 12px rgba(2, 35, 115, .07);
+      --shadow-md: 0 6px 28px rgba(2, 35, 115, .11);
+      --shadow-lg: 0 16px 48px rgba(2, 35, 115, .14);
+      --radius: 18px;
+      --radius-sm: 10px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #060d1f;
+      --bg-card: #0d1d3a;
+      --bg-alt: #0a1628;
+      --surface: #111d34;
+      --text-pri: #e8f0ff;
+      --text-sec: #9ab0d4;
+      --text-muted: #5a7aa0;
+      --border: #1a3260;
+      --shadow-sm: 0 2px 12px rgba(0, 0, 0, .35);
+      --shadow-md: 0 6px 28px rgba(0, 0, 0, .45);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, .55);
+      --blue-50: #0d1d3a;
+      --blue-100: #122448;
+    }
+
+    /* ============================================================
+   RESET & BASE
+   ============================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text-pri);
+      transition: background .35s, color .35s;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    /* ============================================================
+   NAVBAR
+   ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      height: 66px;
+      background: rgba(2, 35, 115, .88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(74, 145, 247, .25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      transition: background .3s;
+    }
+
+    [data-theme="dark"] #navbar {
+      background: rgba(6, 13, 31, .92)
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--grad-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      font-weight: 900;
+      color: var(--blue-900);
+    }
+
+    .nav-title {
+      font-family: 'DM Serif Display', serif;
+      color: #fff;
+      font-size: 1.05rem;
+      letter-spacing: .3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, .72);
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 6px 13px;
+      border-radius: 50px;
+      transition: .2s;
+      letter-spacing: .2px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    /* Dark mode toggle */
+    .theme-toggle {
+      width: 52px;
+      height: 28px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .15);
+      border: 1.5px solid rgba(255, 255, 255, .2);
+      cursor: pointer;
+      position: relative;
+      transition: .3s;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle::after {
+      content: '☀️';
+      position: absolute;
+      top: 50%;
+      left: 4px;
+      transform: translateY(-50%);
+      font-size: .75rem;
+      transition: .3s;
+    }
+
+    [data-theme="dark"] .theme-toggle::after {
+      content: '🌙';
+      left: 26px
+    }
+
+    [data-theme="dark"] .theme-toggle {
+      background: rgba(74, 145, 247, .2)
+    }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: .3s
+    }
+
+    /* ============================================================
+   HERO
+   ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 90px 5% 60px;
+    }
+
+    /* Slideshow backgrounds */
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.4s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1
+    }
+
+    /* Classroom placeholder images via CSS gradients + picsum */
+    .slide-1 {
+      background-image: url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80')
+    }
+
+    .slide-2 {
+      background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&q=80')
+    }
+
+    .slide-3 {
+      background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80')
+    }
+
+    .slide-4 {
+      background-image: url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&q=80')
+    }
+
+    .slide-5 {
+      background-image: url('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1600&q=80')
+    }
+
+    /* Blue gradient overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(135deg,
+          rgba(2, 35, 115, .82) 0%,
+          rgba(10, 46, 138, .70) 40%,
+          rgba(26, 92, 212, .55) 75%,
+          rgba(45, 159, 219, .40) 100%);
+    }
+
+    /* Decorative geo shapes */
+    .hero-geo {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-geo::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, .06);
+      top: -150px;
+      right: -150px;
+    }
+
+    .hero-geo::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(248, 196, 80, .12);
+      bottom: 60px;
+      left: 5%;
+    }
+
+    /* Slide dots */
+    .slide-dots {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .35);
+      cursor: pointer;
+      transition: .3s;
+      border: 1.5px solid rgba(255, 255, 255, .4);
+    }
+
+    .dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      width: 24px;
+      border-radius: 4px
+    }
+
+    /* Hero content */
+    .hero-inner {
+      position: relative;
+      z-index: 5;
+      max-width: 1140px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 22px
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(248, 196, 80, .18);
+      border: 1.5px solid rgba(248, 196, 80, .35);
+      color: var(--gold-light);
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      width: fit-content;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: blink 1.8s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .25
+      }
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      color: #fff;
+      line-height: 1.18;
+    }
+
+    .hero-name em {
+      color: var(--gold-light);
+      font-style: italic;
+      text-shadow: 0 2px 20px rgba(248, 196, 80, .4);
+    }
+
+    .hero-sub {
+      font-size: .98rem;
+      color: rgba(255, 255, 255, .68);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    .hero-quote {
+      border-left: 3px solid var(--gold);
+      padding: 12px 18px;
+      background: rgba(248, 196, 80, .08);
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+      color: rgba(255, 255, 255, .80);
+      font-size: .9rem;
+      line-height: 1.65;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .btn-gold {
+      background: var(--grad-gold);
+      color: var(--blue-900);
+      font-weight: 800;
+      font-size: .85rem;
+      padding: 13px 30px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(232, 170, 32, .4);
+      transition: .25s;
+      letter-spacing: .3px;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(232, 170, 32, .5)
+    }
+
+    .btn-ghost {
+      border: 1.5px solid rgba(255, 255, 255, .3);
+      color: white;
+      font-size: .85rem;
+      font-weight: 600;
+      padding: 13px 30px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .06);
+      transition: .25s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold-light);
+      color: var(--gold-light)
+    }
+
+    /* ---- PROFILE PHOTO FRAME ---- */
+    .hero-photo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .photo-frame-wrap {
+      position: relative;
+      width: 260px;
+    }
+
+    /* Outer rotating ring */
+    .frame-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 2px dashed rgba(248, 196, 80, .45);
+      animation: spin 18s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .frame-ring-2 {
+      position: absolute;
+      inset: -24px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(74, 145, 247, .25);
+      animation: spin 30s linear infinite reverse;
+    }
+
+    /* Main frame */
+    .photo-frame {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff 25%, var(--blue-400) 50%, #fff 75%, var(--gold) 100%);
+      padding: 5px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 0 4px rgba(36, 114, 232, .3), 0 8px 40px rgba(2, 35, 115, .4);
+    }
+
+    .photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1144c8, #0a2e8a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* Ornament badges on frame */
+    .frame-badge {
+      position: absolute;
+      z-index: 10;
+      background: var(--grad-gold);
+      color: var(--blue-900);
+      font-size: .65rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 50px;
+      box-shadow: 0 3px 12px rgba(232, 170, 32, .4);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .badge-top {
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%)
+    }
+
+    .badge-btm {
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%)
+    }
+
+    /* Info chips below photo */
+    .hero-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: rgba(255, 255, 255, .85);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 50px;
+    }
+
+    /* Stats row */
+    .hero-stats {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .hstat {
+      flex: 1;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 14px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .hstat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .hstat-lbl {
+      font-size: .7rem;
+      color: rgba(255, 255, 255, .5);
+      margin-top: 2px
+    }
+
+    /* ============================================================
+   SECTION COMMONS
+   ============================================================ */
+    section:not(#hero) {
+      padding: 88px 5%
+    }
+
+    .sec-inner {
+      max-width: 1140px;
+      margin: 0 auto
+    }
+
+    .sec-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--blue-600);
+      margin-bottom: 10px;
+    }
+
+    [data-theme="dark"] .sec-tag {
+      color: var(--blue-300)
+    }
+
+    .sec-tag::before {
+      content: '';
+      width: 22px;
+      height: 2.5px;
+      background: currentColor;
+      border-radius: 2px
+    }
+
+    .sec-h {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+      color: var(--text-pri);
+      font-weight: 700;
+      line-height: 1.22;
+      margin-bottom: 14px;
+    }
+
+    .sec-h em {
+      color: var(--blue-600);
+      font-style: italic
+    }
+
+    [data-theme="dark"] .sec-h em {
+      color: var(--blue-300)
+    }
+
+    .sec-desc {
+      font-size: .93rem;
+      color: var(--text-sec);
+      line-height: 1.82;
+      max-width: 580px
+    }
+
+    .sec-head {
+      margin-bottom: 52px
+    }
+
+    /* Card base */
+    .card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(36, 114, 232, .3);
+    }
+
+    /* ============================================================
+   SECTION: PROFIL
+   ============================================================ */
+    #profil {
+      background: var(--bg)
+    }
+
+    .profil-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Sticky sidebar */
+    .profil-sidebar {
+      position: sticky;
+      top: 84px;
+      background: var(--grad-card);
+      border-radius: var(--radius);
+      padding: 36px 24px;
+      color: #fff;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .profil-sidebar::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .04);
+      top: -80px;
+      right: -60px;
+      pointer-events: none;
+    }
+
+    /* Sidebar photo frame */
+    .sb-photo-wrap {
+      position: relative;
+      width: 140px;
+      margin: 0 auto 18px
+    }
+
+    .sb-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px dashed rgba(248, 196, 80, .4);
+      animation: spin 20s linear infinite;
+    }
+
+    .sb-frame {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), rgba(255, 255, 255, .6), var(--blue-300), var(--gold));
+      padding: 4px;
+      box-shadow: 0 0 0 3px rgba(74, 145, 247, .25);
+      position: relative;
+      z-index: 2;
+    }
+
+    .sb-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--blue-800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      overflow: hidden;
+    }
+
+    .sb-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%
+    }
+
+    .sb-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .sb-nim {
+      color: var(--gold-light);
+      font-size: .73rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: .5px
+    }
+
+    .sb-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 18px
+    }
+
+    .sb-tag {
+      font-size: .68rem;
+      padding: 4px 11px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .1);
+      color: rgba(255, 255, 255, .8);
+      font-weight: 600;
+    }
+
+    .sb-div {
+      height: 1px;
+      background: rgba(255, 255, 255, .1);
+      margin: 14px 0
+    }
+
+    .sb-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .sb-contact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .7)
+    }
+
+    .sb-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      flex-shrink: 0;
+    }
+
+    /* Profile content */
+    .profil-content {
+      display: flex;
+      flex-direction: column;
+      gap: 28px
+    }
+
+    .pblock h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--text-pri);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .pblock p {
+      font-size: .9rem;
+      line-height: 1.85;
+      color: var(--text-sec)
+    }
+
+    .pblock p+p {
+      margin-top: 10px
+    }
+
+    .quote-card {
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500), var(--blue-400));
+      border-radius: 16px;
+      padding: 26px 30px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-card::before {
+      content: '"';
+      font-family: 'DM Serif Display', serif;
+      font-size: 8rem;
+      line-height: 1;
+      position: absolute;
+      top: -8px;
+      left: 16px;
+      color: rgba(255, 255, 255, .08);
+      pointer-events: none;
+    }
+
+    .quote-card p {
+      font-style: italic;
+      line-height: 1.75;
+      font-size: .93rem;
+      position: relative;
+      z-index: 1
+    }
+
+    .quote-card cite {
+      display: block;
+      margin-top: 12px;
+      font-size: .76rem;
+      color: var(--gold-light);
+      font-weight: 700;
+      font-style: normal;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================================
+   SECTION: ARTEFAK
+   ============================================================ */
+    #artefak {
+      background: var(--bg-alt)
+    }
+
+    .artefak-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px
+    }
+
+    .tab {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+      color: var(--text-muted);
+    }
+
+    .tab.active {
+      background: var(--grad-section);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(36, 114, 232, .3);
+    }
+
+    .tab:hover:not(.active) {
+      border-color: var(--blue-400);
+      color: var(--blue-600)
+    }
+
+    [data-theme="dark"] .tab:hover:not(.active) {
+      color: var(--blue-300)
+    }
+
+    .artefak-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .art-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+
+    .art-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(36, 114, 232, .35);
+    }
+
+    .art-top {
+      height: 6px;
+      background: var(--grad-section);
+    }
+
+    .art-top.gold {
+      background: var(--grad-gold)
+    }
+
+    .art-top.teal {
+      background: linear-gradient(90deg, #0ea5e9, #22d3ee)
+    }
+
+    .art-top.violet {
+      background: linear-gradient(90deg, #6366f1, #8b5cf6)
+    }
+
+    .art-head {
+      padding: 20px 22px 14px;
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .art-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      background: var(--blue-50);
+    }
+
+    [data-theme="dark"] .art-icon {
+      background: rgba(74, 145, 247, .12)
+    }
+
+    .art-type {
+      font-size: .68rem;
+      font-weight: 800;
+      color: var(--blue-500);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 3px
+    }
+
+    [data-theme="dark"] .art-type {
+      color: var(--blue-300)
+    }
+
+    .art-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text-pri);
+      line-height: 1.4
+    }
+
+    .art-body {
+      padding: 16px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .art-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    .art-field label {
+      font-size: .65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .art-field p {
+      font-size: .78rem;
+      line-height: 1.55;
+      color: var(--text-sec)
+    }
+
+    .art-theory {
+      background: var(--bg-alt);
+      border-radius: 10px;
+      padding: 10px 13px;
+    }
+
+    .art-theory label {
+      font-size: .65rem;
+      font-weight: 800;
+      color: var(--blue-600);
+      display: block;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    [data-theme="dark"] .art-theory label {
+      color: var(--blue-300)
+    }
+
+    .art-theory p {
+      font-size: .77rem;
+      line-height: 1.55;
+      color: var(--text-sec)
+    }
+
+    .art-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap
+    }
+
+    .badge-plus {
+      font-size: .67rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(34, 197, 94, .1);
+      color: #16a34a;
+      font-weight: 700;
+    }
+
+    .badge-minus {
+      font-size: .67rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(239, 68, 68, .08);
+      color: #dc2626;
+      font-weight: 700;
+    }
+
+    /* External link button */
+    .art-footer {
+      padding: 12px 22px 18px;
+      border-top: 1.5px solid var(--border);
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 14px rgba(36, 114, 232, .28);
+      transition: .2s;
+      text-decoration: none;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-link:hover {
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-600));
+      box-shadow: 0 6px 20px rgba(36, 114, 232, .38)
+    }
+
+    .btn-link svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0
+    }
+
+    /* ============================================================
+   SECTION: LAMPIRAN
+   ============================================================ */
+    #lampiran {
+      background: var(--bg)
+    }
+
+    .lamp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px
+    }
+
+    .lamp-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      transition: .2s;
+      background: var(--bg-card);
+    }
+
+    .lamp-card:hover {
+      border-color: var(--blue-400);
+      box-shadow: var(--shadow-md)
+    }
+
+    .lamp-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      color: var(--blue-600);
+      font-weight: 700;
+      opacity: .2;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    [data-theme="dark"] .lamp-num {
+      color: var(--blue-300)
+    }
+
+    .lamp-card h3 {
+      font-size: .95rem;
+      font-weight: 800;
+      color: var(--text-pri);
+      margin-bottom: 18px;
+      line-height: 1.4
+    }
+
+    .siklus-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .siklus-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--bg-alt);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .sk-badge {
+      background: var(--grad-section);
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 800;
+      padding: 4px 11px;
+      border-radius: 50px;
+      white-space: nowrap;
+      margin-top: 1px;
+      flex-shrink: 0;
+      letter-spacing: .5px;
+    }
+
+    .siklus-item p {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text-sec)
+    }
+
+    .sk-score {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px
+    }
+
+    .sk-score label {
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--text-muted)
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: .82rem
+    }
+
+    .sk-val {
+      font-size: .72rem;
+      color: var(--text-muted);
+      font-weight: 600
+    }
+
+    /* ============================================================
+   SECTION: MODEL GURU
+   ============================================================ */
+    #model {
+      background: var(--blue-900);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="dark"] #model {
+      background: #03091a
+    }
+
+    #model::before {
+      content: '';
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(36, 114, 232, .2) 0%, transparent 65%);
+      top: -200px;
+      right: -200px;
+      pointer-events: none;
+    }
+
+    #model .sec-tag {
+      color: var(--gold-light)
+    }
+
+    #model .sec-tag::before {
+      background: var(--gold-light)
+    }
+
+    #model .sec-h {
+      color: #fff
+    }
+
+    #model .sec-h em {
+      color: var(--gold-light);
+      text-shadow: 0 2px 20px rgba(248, 196, 80, .3)
+    }
+
+    #model .sec-desc {
+      color: rgba(255, 255, 255, .55)
+    }
+
+    .model-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 56px;
+      align-items: start
+    }
+
+    .model-misi-card {
+      background: rgba(255, 255, 255, .05);
+      border: 1.5px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .model-misi-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      margin-bottom: 14px;
+    }
+
+    .model-misi-card p {
+      font-size: .88rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, .7)
+    }
+
+    .model-misi-card p+p {
+      margin-top: 10px
+    }
+
+    .karakter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px
+    }
+
+    .karakter-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: .2s;
+    }
+
+    .karakter-item:hover {
+      background: rgba(255, 255, 255, .07)
+    }
+
+    .k-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .karakter-item p {
+      font-size: .83rem;
+      color: rgba(255, 255, 255, .72);
+      line-height: 1.55
+    }
+
+    .karakter-item strong {
+      color: rgba(255, 255, 255, .9)
+    }
+
+    .kompetensi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .komp-card {
+      background: rgba(248, 196, 80, .07);
+      border: 1.5px solid rgba(248, 196, 80, .15);
+      border-radius: 14px;
+      padding: 18px 16px;
+      transition: .2s;
+    }
+
+    .komp-card:hover {
+      background: rgba(248, 196, 80, .12)
+    }
+
+    .komp-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px
+    }
+
+    .komp-card h4 {
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 5px
+    }
+
+    .komp-card p {
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .58);
+      line-height: 1.55
+    }
+
+    /* ============================================================
+   SECTION: REFLEKSI
+   ============================================================ */
+    #refleksi {
+      background: var(--bg-alt)
+    }
+
+    .refleksi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px
+    }
+
+    .rcard {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 28px;
+      border-top: 4px solid transparent;
+      transition: .2s;
+    }
+
+    .rcard:hover {
+      box-shadow: var(--shadow-md)
+    }
+
+    .rcard.rc-belajar {
+      border-top-color: var(--blue-500)
+    }
+
+    .rcard.rc-tantangan {
+      border-top-color: var(--gold)
+    }
+
+    .rcard.rc-saran {
+      border-top-color: #8b5cf6
+    }
+
+    .rcard-icon {
+      font-size: 1.9rem;
+      margin-bottom: 14px;
+      display: block
+    }
+
+    .rcard h3 {
+      font-size: .95rem;
+      font-weight: 800;
+      color: var(--text-pri);
+      margin-bottom: 14px
+    }
+
+    .rcard ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .rcard li {
+      font-size: .82rem;
+      line-height: 1.65;
+      color: var(--text-sec);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .rcard li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--blue-500);
+      font-weight: 800;
+    }
+
+    .rc-tantangan li::before {
+      color: var(--gold)
+    }
+
+    .rc-saran li::before {
+      color: #8b5cf6
+    }
+
+    /* ============================================================
+   SECTION: FILOSOFI
+   ============================================================ */
+    #filosofi {
+      background: var(--bg)
+    }
+
+    .filosofi-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 56px
+    }
+
+    .f-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .nilai-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--blue-500);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 18px;
+      transition: .2s;
+    }
+
+    .nilai-card:hover {
+      border-left-color: var(--gold);
+      box-shadow: var(--shadow-sm)
+    }
+
+    .nilai-card h4 {
+      font-size: .83rem;
+      font-weight: 800;
+      color: var(--text-pri);
+      margin-bottom: 5px
+    }
+
+    .nilai-card p {
+      font-size: .77rem;
+      color: var(--text-sec);
+      line-height: 1.55
+    }
+
+    .f-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    .fpara {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 22px 24px;
+    }
+
+    .fpara-num {
+      font-size: .68rem;
+      font-weight: 800;
+      color: var(--blue-600);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 7px;
+    }
+
+    [data-theme="dark"] .fpara-num {
+      color: var(--blue-300)
+    }
+
+    .fpara p {
+      font-size: .88rem;
+      line-height: 1.9;
+      color: var(--text-sec)
+    }
+
+    .teori-refs {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 10px
+    }
+
+    .teori-pill {
+      font-size: .65rem;
+      padding: 3px 11px;
+      border-radius: 50px;
+      background: var(--blue-50);
+      color: var(--blue-700);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .teori-pill {
+      background: rgba(74, 145, 247, .12);
+      color: var(--blue-300)
+    }
+
+    /* ============================================================
+   FOOTER
+   ============================================================ */
+    footer {
+      background: var(--blue-900);
+      color: rgba(255, 255, 255, .55);
+      padding: 60px 5% 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="dark"] footer {
+      background: #03091a
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(36, 114, 232, .15) 0%, transparent 65%);
+      bottom: -200px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .ft-brand .ft-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .ft-brand .ft-logo span {
+      color: var(--gold-light)
+    }
+
+    .ft-brand p {
+      font-size: .82rem;
+      line-height: 1.75;
+      max-width: 280px
+    }
+
+    .ft-title {
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 18px;
+    }
+
+    /* Social icons */
+    .socials {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, .65);
+      font-size: .82rem;
+      font-weight: 500;
+      transition: .2s;
+    }
+
+    .social-link:hover {
+      color: var(--gold-light)
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: .2s;
+    }
+
+    .social-link:hover .social-icon {
+      background: rgba(248, 196, 80, .15)
+    }
+
+    .si-instagram {
+      background: rgba(225, 48, 108, .15)
+    }
+
+    .si-linkedin {
+      background: rgba(10, 102, 194, .18)
+    }
+
+    .si-youtube {
+      background: rgba(255, 0, 0, .12)
+    }
+
+    .si-twitter {
+      background: rgba(29, 161, 242, .12)
+    }
+
+    .si-email {
+      background: rgba(74, 145, 247, .15)
+    }
+
+    .si-wa {
+      background: rgba(37, 211, 102, .12)
+    }
+
+    /* Contact info */
+    .contacts-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .ct-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .8rem
+    }
+
+    .ct-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, .06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      margin-top: 1px;
+    }
+
+    .ct-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px
+    }
+
+    .ct-label {
+      font-size: .65rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .3);
+      text-transform: uppercase;
+      letter-spacing: .8px
+    }
+
+    .ct-val {
+      color: rgba(255, 255, 255, .7);
+      font-size: .8rem
+    }
+
+    .ct-val a {
+      color: var(--gold-light);
+      font-weight: 600
+    }
+
+    .ct-val a:hover {
+      text-decoration: underline
+    }
+
+    /* Footer bottom */
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .75rem;
+    }
+
+    .footer-credits {
+      color: rgba(255, 255, 255, .3)
+    }
+
+    .footer-ppg {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .08);
+      padding: 6px 16px;
+      border-radius: 50px;
+      color: rgba(255, 255, 255, .5);
+      font-size: .72rem;
+      font-weight: 600;
+    }
+
+    /* ============================================================
+   REVEAL ANIMATIONS
+   ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .rv1 {
+      transition-delay: .08s
+    }
+
+    .rv2 {
+      transition-delay: .16s
+    }
+
+    .rv3 {
+      transition-delay: .24s
+    }
+
+    .rv4 {
+      transition-delay: .32s
+    }
+
+    /* ============================================================
+   RESPONSIVE
+   ============================================================ */
+    @media(max-width:1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center
+      }
+
+      .hero-sub,
+      .hero-quote {
+        margin: 0 auto
+      }
+
+      .hero-badge,
+      .hero-cta {
+        justify-content: center;
+        margin: 0 auto
+      }
+
+      .hero-photo-area {
+        order: 2
+      }
+
+      .hero-text {
+        order: 1
+      }
+
+      .profil-layout {
+        grid-template-columns: 1fr
+      }
+
+      .profil-sidebar {
+        position: static
+      }
+
+      .lamp-grid {
+        grid-template-columns: 1fr
+      }
+
+      .model-layout {
+        grid-template-columns: 1fr
+      }
+
+      .refleksi-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .filosofi-layout {
+        grid-template-columns: 1fr
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media(max-width:768px) {
+      .hamburger {
+        display: flex
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 66px;
+        left: 0;
+        right: 0;
+        background: rgba(2, 35, 115, .97);
+        flex-direction: column;
+        padding: 14px 5%;
+        gap: 4px;
+        border-bottom: 1px solid rgba(74, 145, 247, .2);
+      }
+
+      .nav-links.open {
+        display: flex
+      }
+
+      .nav-links a {
+        padding: 11px 14px;
+        font-size: .88rem
+      }
+
+      .refleksi-grid {
+        grid-template-columns: 1fr
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr
+      }
+
+      .artefak-grid {
+        grid-template-columns: 1fr
+      }
+
+      .kompetensi-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:480px) {
+      section:not(#hero) {
+        padding: 64px 4%
+      }
+
+      .hero-inner {
+        padding-bottom: 20px
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <nav id="navbar">
+    <div class="nav-brand">
+      <div class="nav-logo-mark">E</div>
+      <span class="nav-title">E-Portfolio PPG</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#artefak">Artefak</a></li>
+      <li><a href="#lampiran">Lampiran</a></li>
+      <li><a href="#model">Model Guru</a></li>
+      <li><a href="#refleksi">Refleksi</a></li>
+      <li><a href="#filosofi">Filosofi</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode"></div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <section id="hero">
+    <!-- Slideshow -->
+    <div class="hero-slides">
+      <div class="hero-slide slide-1 active"></div>
+      <div class="hero-slide slide-2"></div>
+      <div class="hero-slide slide-3"></div>
+      <div class="hero-slide slide-4"></div>
+      <div class="hero-slide slide-5"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-geo"></div>
+
+    <div class="hero-inner">
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          PPG Calon Guru · E-Portfolio
+        </div>
+        <h1 class="hero-name">
+          Selamat Datang<br>di Portofolio<br><em>Hafidz Ruzaini</em>
+        </h1>
+        <p class="hero-sub">
+          Perjalanan reflektif seorang calon guru profesional melalui pengalaman PPL Terbimbing — merangkum
+          pembelajaran, karya, dan transformasi diri menuju guru yang berdampak.
+        </p>
+        <blockquote class="hero-quote">
+          "Guru bukan hanya pengajar ilmu, tetapi penjaga harapan dan arsitek masa depan generasi bangsa."
+        </blockquote>
+        <div class="hero-cta">
+          <a href="#profil" class="btn-gold">Lihat Profil Saya</a>
+          <a href="#artefak" class="btn-ghost">Artefak Pembelajaran</a>
+        </div>
+      </div>
+
+      <!-- Right: Photo Frame -->
+      <div class="hero-photo-area">
+        <div class="photo-frame-wrap">
+          <div class="frame-ring-2"></div>
+          <div class="frame-ring"></div>
+          <div class="photo-frame">
+            <div class="photo-inner">
+              <!-- Ganti src dengan link foto Anda -->
+              👩‍🏫
+              <!-- <img src="LINK_FOTO_ANDA.jpg" alt="Foto Profil"> -->
+            </div>
+          </div>
+          <span class="frame-badge badge-top">PPG Calon Guru</span>
+          <span class="frame-badge badge-btm">Hafidz Ruzaini</span>
+        </div>
+        <div class="hero-chips">
+          <span class="chip">📍 Cilacap, Jawa Tengah</span>
+          <span class="chip">📚 Informatika</span>
+          <span class="chip">🎓 LPTK Universitas Muhammadiyah Surakarta</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hstat-num">3</div>
+            <div class="hstat-lbl">Siklus PPL</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-num">7+</div>
+            <div class="hstat-lbl">Artefak</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-num">2</div>
+            <div class="hstat-lbl">E-Portfolio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide Dots -->
+    <div class="slide-dots" id="slideDots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+      <div class="dot" onclick="goSlide(3)"></div>
+      <div class="dot" onclick="goSlide(4)"></div>
+    </div>
+  </section>
+
+  <!-- ================= PROFIL ================= -->
+  <section id="profil">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Komponen 1</div>
+        <h2 class="sec-h">Profil <em>Mahasiswa</em></h2>
+        <p class="sec-desc">Perkenalan diri yang mencerminkan identitas, inspirasi, dan komitmen menuju guru yang
+          profesional.</p>
+      </div>
+      <div class="profil-layout">
+        <!-- Sidebar -->
+        <div class="profil-sidebar reveal">
+          <div class="sb-photo-wrap">
+            <div class="sb-ring"></div>
+            <div class="sb-frame">
+              <div class="sb-photo">
+                👩‍🏫
+                <!-- <img src="LINK_FOTO_ANDA.jpg" alt="Foto"> -->
+              </div>
+            </div>
+          </div>
+          <div class="sb-name">Hafidz Ruzaini, S.Kom</div>
+          <div class="sb-nim">NIM · A971260017</div>
+          <div class="sb-tags">
+            <span class="sb-tag">PPG Calon Guru</span>
+            <span class="sb-tag">Informatika</span>
+            <!-- <span class="sb-tag">Universitas Muhammadiyah Surakarta</span> -->
+          </div>
+          <div class="sb-div"></div>
+          <div class="sb-contacts">
+            <div class="sb-contact">
+              <div class="sb-icon">📍</div>
+              <span>Cilacap, Jawa Tengah</span>
+            </div>
+            <div class="sb-contact">
+              <div class="sb-icon">🏫</div>
+              <span>SMA Negeri 2 Sukoharjo</span>
+            </div>
+            <div class="sb-contact">
+              <div class="sb-icon">🎓</div>
+              <span>Universitas/LPTK</span>
+            </div>
+            <div class="sb-contact">
+              <div class="sb-icon">📧</div>
+              <span>email@contoh.ac.id</span>
+            </div>
+          </div>
+        </div>
+        <!-- Content -->
+        <div class="profil-content">
+          <div class="pblock card reveal rv1" style="padding:26px 28px">
+            <h3>Asal &amp; Keunikan Daerah</h3>
+            <p> Saya berasal dari Cilacap, sebuah daerah pesisir di selatan Pulau Jawa yang
+              dikenal sebagai kota industri
+              sekaligus wilayah dengan kekayaan budaya dan alam yang beragam. Cilacap memiliki ikon alam berupa Pantai
+              Teluk Penyu dan Benteng Pendem yang menjadi saksi sejarah sekaligus daya tarik wisata daerah.</p>
+            <p>Keunikan Cilacap terletak pada perpaduan kehidupan masyarakat pesisir yang sederhana, budaya gotong
+              royong yang masih kuat, serta keberagaman masyarakat yang hidup berdampingan. Lingkungan tersebut
+              membentuk karakter saya menjadi pribadi yang lebih adaptif, pekerja keras, dan menghargai proses dalam
+              belajar maupun mengajar.</p>
+            <p>Tumbuh di daerah dengan latar belakang masyarakat yang beragam membuat saya memahami bahwa setiap
+              peserta
+              didik memiliki potensi dan cara belajar yang berbeda. Hal inilah yang menjadi motivasi saya untuk
+              menjadi
+              guru yang tidak hanya menyampaikan materi, tetapi juga mampu memahami kebutuhan siswa, menciptakan
+              pembelajaran yang bermakna, dan memberikan dampak positif bagi lingkungan sekitar.</p>
+          </div>
+          <div class="pblock card reveal rv2" style="padding:26px 28px">
+            <h3>Inspirasi Menjadi Guru</h3>
+            <p>Perjalanan saya menuju profesi guru bermula dari [cerita inspirasi – sosok guru, pengalaman, atau momen
+              tertentu]. Sosok [nama/tokoh] menjadi inspirasi utama yang menanamkan keyakinan bahwa pendidikan adalah
+              investasi terbaik bagi bangsa.</p>
+            <p>[Ceritakan lebih lanjut tentang momen-momen yang memperkuat panggilan Anda untuk menjadi seorang pendidik
+              yang berdedikasi.]</p>
+          </div>
+          <div class="pblock card reveal rv3" style="padding:26px 28px">
+            <h3>Tujuan Menjadi Guru Profesional</h3>
+            <p>Tujuan saya adalah menjadi guru yang tidak hanya menyampaikan materi, tetapi juga [tujuan spesifik:
+              membentuk karakter, menginspirasi berpikir kritis, dll]. Saya percaya bahwa setiap siswa memiliki potensi
+              unik yang perlu dikembangkan melalui pembelajaran yang bermakna, kontekstual, dan menyenangkan.</p>
+          </div>
+          <div class="quote-card reveal rv4">
+            <p>"[Tuliskan kutipan bermakna yang memperkuat profil Anda sebagai calon guru – bisa dari tokoh pendidikan,
+              philosopher, atau kutipan personal yang mencerminkan visi Anda dalam mendidik generasi masa depan]"</p>
+            <cite>— [Sumber Kutipan]</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ARTEFAK ================= -->
+  <section id="artefak">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Komponen 2</div>
+        <h2 class="sec-h">Artefak Produk <em>Pembelajaran</em></h2>
+        <p class="sec-desc">Koleksi perangkat dan produk pembelajaran beserta analisis mendalam, kajian teori, dan
+          tautan ke dokumen asli.</p>
+      </div>
+      <div class="artefak-tabs">
+        <button class="tab active" onclick="filterArtefak('semua',this)">Semua Artefak</button>
+        <button class="tab" onclick="filterArtefak('rpp',this)">📋 RPP</button>
+        <button class="tab" onclick="filterArtefak('media',this)">🎨 Media</button>
+        <button class="tab" onclick="filterArtefak('siswa',this)">📝 Hasil Siswa</button>
+        <button class="tab" onclick="filterArtefak('video',this)">🎬 Video</button>
+        <button class="tab" onclick="filterArtefak('penilaian',this)">⭐ Penilaian</button>
+      </div>
+      <div class="artefak-grid" id="artefakGrid">
+
+        <!-- ARTEFAK 1 -->
+        <div class="art-card reveal" data-k="rpp">
+          <div class="art-top"></div>
+          <div class="art-head">
+            <div class="art-icon">📋</div>
+            <div>
+              <div class="art-type">RPP · Siklus 1</div>
+              <div class="art-title">Rencana Pelaksanaan Pembelajaran – Pertemuan 1</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-row">
+              <div class="art-field"><label>Konteks</label>
+                <p>Kelas X, Materi [Topik], Kurikulum Merdeka, [Sekolah]</p>
+              </div>
+              <div class="art-field"><label>Tujuan</label>
+                <p>Siswa mampu [kompetensi] melalui model [PBL/PjBL/dll]</p>
+              </div>
+            </div>
+            <div class="art-theory">
+              <label>Kajian Teori</label>
+              <p>Mengintegrasikan [Teori Konstruktivisme/dll] dari mata kuliah [nama MK] yang terintegrasi PPL
+                Terbimbing.</p>
+            </div>
+            <div class="art-badges">
+              <span class="badge-plus">✓ Terstruktur</span>
+              <span class="badge-minus">⚠ Waktu Sempit</span>
+            </div>
+          </div>
+          <div class="art-footer">
+            <a href="LINK_RPP_SIKLUS1_ANDA" target="_blank" class="btn-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                <polyline points="15,3 21,3 21,9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Buka Dokumen RPP
+            </a>
+          </div>
+        </div>
+
+        <!-- ARTEFAK 2 -->
+        <div class="art-card reveal rv1" data-k="media">
+          <div class="art-top gold"></div>
+          <div class="art-head">
+            <div class="art-icon">🎨</div>
+            <div>
+              <div class="art-type">Media Pembelajaran · Siklus 2</div>
+              <div class="art-title">Media Interaktif [Nama / Platform Media]</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-row">
+              <div class="art-field"><label>Konteks</label>
+                <p>Visualisasi [topik] secara digital, Siklus 2 Kelas [X]</p>
+              </div>
+              <div class="art-field"><label>Tujuan</label>
+                <p>Meningkatkan pemahaman konsep melalui representasi visual interaktif</p>
+              </div>
+            </div>
+            <div class="art-theory">
+              <label>Kajian Teori</label>
+              <p>Dale's Cone of Experience dan prinsip multimedia learning (Mayer, 2009) – Media Pembelajaran.</p>
+            </div>
+            <div class="art-badges">
+              <span class="badge-plus">✓ Visual & Menarik</span>
+              <span class="badge-minus">⚠ Butuh Internet</span>
+            </div>
+          </div>
+          <div class="art-footer">
+            <a href="LINK_MEDIA_PEMBELAJARAN_ANDA" target="_blank" class="btn-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                <polyline points="15,3 21,3 21,9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Buka Media Pembelajaran
+            </a>
+          </div>
+        </div>
+
+        <!-- ARTEFAK 3 -->
+        <div class="art-card reveal rv2" data-k="siswa">
+          <div class="art-top teal"></div>
+          <div class="art-head">
+            <div class="art-icon">📝</div>
+            <div>
+              <div class="art-type">Hasil Kerja Siswa · Siklus 1–3</div>
+              <div class="art-title">LKPD &amp; Hasil Penilaian Formatif Siswa</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-row">
+              <div class="art-field"><label>Konteks</label>
+                <p>Lembar kerja yang dikerjakan siswa selama praktik mengajar</p>
+              </div>
+              <div class="art-field"><label>Tujuan</label>
+                <p>Mengukur capaian belajar dan mengidentifikasi miskonsepsi siswa</p>
+              </div>
+            </div>
+            <div class="art-theory">
+              <label>Kajian Teori</label>
+              <p>Asesmen formatif (Black &amp; Wiliam, 1998) dan prinsip feedback – Evaluasi Pembelajaran.</p>
+            </div>
+            <div class="art-badges">
+              <span class="badge-plus">✓ Data Autentik</span>
+              <span class="badge-minus">⚠ Rubrik Perlu Detail</span>
+            </div>
+          </div>
+          <div class="art-footer">
+            <a href="LINK_LKPD_HASIL_SISWA" target="_blank" class="btn-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                <polyline points="15,3 21,3 21,9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Lihat Hasil Kerja Siswa
+            </a>
+          </div>
+        </div>
+
+        <!-- ARTEFAK 4 -->
+        <div class="art-card reveal" data-k="penilaian">
+          <div class="art-top"></div>
+          <div class="art-head">
+            <div class="art-icon">⭐</div>
+            <div>
+              <div class="art-type">Penilaian GP &amp; DPL</div>
+              <div class="art-title">Penilaian Rancangan &amp; Praktik Pembelajaran</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-row">
+              <div class="art-field"><label>Konteks</label>
+                <p>Penilaian Guru Pamong &amp; DPL selama 3 siklus PPL</p>
+              </div>
+              <div class="art-field"><label>Tujuan</label>
+                <p>Evaluasi &amp; umpan balik terhadap kompetensi mengajar mahasiswa</p>
+              </div>
+            </div>
+            <div class="art-theory">
+              <label>Kajian Teori</label>
+              <p>Standar kompetensi guru profesional – Permendiknas No. 16 Tahun 2007.</p>
+            </div>
+            <div class="art-badges">
+              <span class="badge-plus">✓ Umpan Balik Ahli</span>
+              <span class="badge-plus">✓ 3 Siklus</span>
+            </div>
+          </div>
+          <div class="art-footer">
+            <a href="LINK_PENILAIAN_GP_DPL" target="_blank" class="btn-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                <polyline points="15,3 21,3 21,9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Buka Instrumen Penilaian
+            </a>
+          </div>
+        </div>
+
+        <!-- ARTEFAK 5 -->
+        <div class="art-card reveal rv1" data-k="video">
+          <div class="art-top violet"></div>
+          <div class="art-head">
+            <div class="art-icon">🎬</div>
+            <div>
+              <div class="art-type">Video Pembelajaran · Siklus 2</div>
+              <div class="art-title">Dokumentasi Praktik Mengajar di Kelas</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-row">
+              <div class="art-field"><label>Konteks</label>
+                <p>Rekaman praktik mengajar kelas [X] materi [Topik]</p>
+              </div>
+              <div class="art-field"><label>Tujuan</label>
+                <p>Refleksi visual keterampilan mengajar dan interaksi siswa</p>
+              </div>
+            </div>
+            <div class="art-theory">
+              <label>Kajian Teori</label>
+              <p>Kerangka TPACK (Mishra &amp; Koehler) dan refleksi kritis – mata kuliah PPL.</p>
+            </div>
+            <div class="art-badges">
+              <span class="badge-plus">✓ Bukti Autentik</span>
+              <span class="badge-minus">⚠ Audio Kurang Jelas</span>
+            </div>
+          </div>
+          <div class="art-footer">
+            <a href="LINK_VIDEO_MENGAJAR" target="_blank" class="btn-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                <polyline points="15,3 21,3 21,9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Tonton Video Mengajar
+            </a>
+          </div>
+        </div>
+
+        <!-- ARTEFAK 6 -->
+        <div class="art-card reveal rv2" data-k="rpp">
+          <div class="art-top gold"></div>
+          <div class="art-head">
+            <div class="art-icon">📊</div>
+            <div>
+              <div class="art-type">Instrumen Penilaian</div>
+              <div class="art-title">Tes Akhir &amp; Rubrik Penilaian Proyek</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-row">
+              <div class="art-field"><label>Konteks</label>
+                <p>Instrumen evaluasi sumatif untuk mengukur capaian akhir</p>
+              </div>
+              <div class="art-field"><label>Tujuan</label>
+                <p>Mengukur ketercapaian tujuan pembelajaran secara komprehensif</p>
+              </div>
+            </div>
+            <div class="art-theory">
+              <label>Kajian Teori</label>
+              <p>Taksonomi Bloom revisi (Anderson &amp; Krathwohl, 2001) – level HOTS.</p>
+            </div>
+            <div class="art-badges">
+              <span class="badge-plus">✓ Mengukur HOTS</span>
+              <span class="badge-minus">⚠ Belum Divalidasi Ahli</span>
+            </div>
+          </div>
+          <div class="art-footer">
+            <a href="LINK_INSTRUMEN_PENILAIAN" target="_blank" class="btn-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                <polyline points="15,3 21,3 21,9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Unduh Instrumen Penilaian
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /artefak-grid -->
+    </div>
+  </section>
+
+  <!-- ================= LAMPIRAN ================= -->
+  <section id="lampiran">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Komponen 3</div>
+        <h2 class="sec-h">Instrumen <em>Penilaian</em></h2>
+        <p class="sec-desc">Lampiran penilaian dari Guru Pamong terhadap rancangan dan praktik pembelajaran selama 3
+          siklus PPL Terbimbing.</p>
+      </div>
+      <div class="lamp-grid">
+        <div class="lamp-card reveal">
+          <div class="lamp-num">07</div>
+          <h3>Instrumen Penilaian Penyusunan Perangkat Pembelajaran</h3>
+          <div class="siklus-list">
+            <div class="siklus-item">
+              <span class="sk-badge">Siklus 1</span>
+              <div>
+                <p>Penilaian terhadap RPP, LKPD, dan instrumen asesmen yang disusun mahasiswa pada siklus pertama.</p>
+                <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★☆</span><span
+                    class="sk-val">85/100</span></div>
+              </div>
+            </div>
+            <div class="siklus-item">
+              <span class="sk-badge">Siklus 2</span>
+              <div>
+                <p>Perbaikan perangkat berdasarkan umpan balik siklus 1 dengan penambahan variasi media dan
+                  diferensiasi.</p>
+                <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★☆</span><span
+                    class="sk-val">88/100</span></div>
+              </div>
+            </div>
+            <div class="siklus-item">
+              <span class="sk-badge">Siklus 3</span>
+              <div>
+                <p>Perangkat komprehensif dengan integrasi asesmen formatif dan sumatif yang terstandar.</p>
+                <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★★</span><span
+                    class="sk-val">92/100</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lamp-card reveal rv1">
+          <div class="lamp-num">08</div>
+          <h3>Instrumen Penilaian Praktik Mengajar Mahasiswa</h3>
+          <div class="siklus-list">
+            <div class="siklus-item">
+              <span class="sk-badge">Siklus 1</span>
+              <div>
+                <p>Evaluasi praktik mengajar perdana dengan penekanan pada penguasaan kelas dan penyampaian materi.</p>
+                <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★☆</span><span
+                    class="sk-val">83/100</span></div>
+              </div>
+            </div>
+            <div class="siklus-item">
+              <span class="sk-badge">Siklus 2</span>
+              <div>
+                <p>Peningkatan signifikan dalam pengelolaan kelas dan penggunaan metode pembelajaran aktif.</p>
+                <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★☆</span><span
+                    class="sk-val">87/100</span></div>
+              </div>
+            </div>
+            <div class="siklus-item">
+              <span class="sk-badge">Siklus 3</span>
+              <div>
+                <p>Praktik mengajar yang matang dengan kemampuan adaptasi situasi kelas dan pemberian umpan balik
+                  efektif.</p>
+                <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★★</span><span
+                    class="sk-val">91/100</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODEL GURU ================= -->
+  <section id="model">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Komponen 4</div>
+        <h2 class="sec-h">Model Guru <em>yang Dituju</em></h2>
+        <p class="sec-desc">Rancangan misi, kompetensi, dan karakter guru profesional yang ingin dibangun sebagai
+          panduan perjalanan ke depan.</p>
+      </div>
+      <div class="model-layout">
+        <div>
+          <div class="model-misi-card reveal">
+            <h3>Pernyataan Misi</h3>
+            <p>Saya berkomitmen untuk menjadi seorang guru [bidang studi] yang [nilai utama:
+              inspiratif/inovatif/berkarakter] yang mampu [tujuan utama: memberdayakan potensi siswa, menciptakan
+              pembelajaran bermakna, dll].</p>
+            <p style="margin-top:12px">Melalui pendekatan [pendekatan pedagogi yang diyakini], saya bertekad untuk
+              [dampak yang ingin dicapai terhadap siswa dan masyarakat luas].</p>
+          </div>
+          <div class="karakter-list">
+            <div
+              style="font-size:.7rem;font-weight:800;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px">
+              Karakter Guru Ideal</div>
+            <div class="karakter-item reveal">
+              <div class="k-dot"></div>
+              <p><strong>Reflektif &amp; Adaptif</strong> — Selalu mengkaji dan memperbaiki praktik mengajar berdasarkan
+                bukti dan umpan balik.</p>
+            </div>
+            <div class="karakter-item reveal rv1">
+              <div class="k-dot"></div>
+              <p><strong>Empati &amp; Inklusif</strong> — Memahami keberagaman siswa dan memastikan setiap siswa merasa
+                dihargai dan didukung.</p>
+            </div>
+            <div class="karakter-item reveal rv2">
+              <div class="k-dot"></div>
+              <p><strong>Inovatif &amp; Kreatif</strong> — Terus berinovasi dalam metode dan media pembelajaran untuk
+                meningkatkan kualitas pengajaran.</p>
+            </div>
+            <div class="karakter-item reveal rv3">
+              <div class="k-dot"></div>
+              <p><strong>Kolaboratif &amp; Komunikatif</strong> — Membangun hubungan produktif dengan sesama guru,
+                siswa, orang tua, dan komunitas.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            style="font-size:.7rem;font-weight:800;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px">
+            Kompetensi yang Dibangun</div>
+          <div class="kompetensi-grid">
+            <div class="komp-card reveal">
+              <div class="komp-icon">🧠</div>
+              <h4>Kompetensi Pedagogi</h4>
+              <p>Menguasai strategi pembelajaran berpusat pada siswa dan asesmen formatif yang efektif.</p>
+            </div>
+            <div class="komp-card reveal rv1">
+              <div class="komp-icon">📚</div>
+              <h4>Kompetensi Profesional</h4>
+              <p>Mendalami konten bidang studi secara komprehensif dan mengikuti perkembangan keilmuan terkini.</p>
+            </div>
+            <div class="komp-card reveal rv2">
+              <div class="komp-icon">❤️</div>
+              <h4>Kompetensi Kepribadian</h4>
+              <p>Menjunjung integritas, dedikasi, dan keteladanan sebagai fondasi karakter pendidik.</p>
+            </div>
+            <div class="komp-card reveal rv3">
+              <div class="komp-icon">🤝</div>
+              <h4>Kompetensi Sosial</h4>
+              <p>Membangun komunikasi efektif dan kolaborasi positif dengan seluruh warga sekolah.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REFLEKSI ================= -->
+  <section id="refleksi">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <div class="sec-tag">E-Portfolio 2 · UAS</div>
+        <h2 class="sec-h">Refleksi Akhir <em>PPL Terbimbing</em></h2>
+        <p class="sec-desc">Analisis mendalam terhadap perjalanan, tantangan, dan pembelajaran bermakna selama PPL
+          Terbimbing dari awal hingga akhir.</p>
+      </div>
+      <div class="refleksi-grid">
+        <div class="rcard rc-belajar reveal">
+          <span class="rcard-icon">🌱</span>
+          <h3>Yang Telah Saya Pelajari</h3>
+          <ul>
+            <li>Memahami dinamika kelas nyata yang berbeda dari teori di perkuliahan</li>
+            <li>Mengembangkan fleksibilitas dalam menyesuaikan rencana pembelajaran dengan kondisi aktual</li>
+            <li>Menguasai teknik diferensiasi untuk memenuhi kebutuhan belajar yang beragam</li>
+            <li>Membangun hubungan profesional dengan guru pamong dan kolega</li>
+            <li>[Tambahkan pembelajaran bermakna lainnya]</li>
+          </ul>
+        </div>
+        <div class="rcard rc-tantangan reveal rv1">
+          <span class="rcard-icon">⚡</span>
+          <h3>Pengalaman Menantang &amp; Solusinya</h3>
+          <ul>
+            <li><strong>Tantangan:</strong> Manajemen kelas dengan beragam motivasi siswa<br><em>Solusi:</em> Gamifikasi
+              dan pembelajaran kolaboratif</li>
+            <li><strong>Tantangan:</strong> Keterbatasan waktu persiapan perangkat<br><em>Solusi:</em> Template adaptif
+              dan bank soal terstandar</li>
+            <li>[Tambahkan tantangan spesifik beserta solusinya]</li>
+          </ul>
+        </div>
+        <div class="rcard rc-saran reveal rv2">
+          <span class="rcard-icon">💬</span>
+          <h3>Umpan Balik Konstruktif</h3>
+          <ul>
+            <li>Guru pamong menyarankan peningkatan pengelolaan waktu saat diskusi kelas</li>
+            <li>DPL merekomendasikan variasi pertanyaan HOTS yang lebih beragam</li>
+            <li>Saran untuk meningkatkan keterlibatan siswa melalui teknologi lebih variatif</li>
+            <li>[Tambahkan umpan balik spesifik untuk perbaikan ke PPL Mandiri]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FILOSOFI ================= -->
+  <section id="filosofi">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <div class="sec-tag">E-Portfolio 2 · Filosofi</div>
+        <h2 class="sec-h">Filosofi <em>Mengajar</em></h2>
+        <p class="sec-desc">Prinsip, keyakinan, dan nilai yang mendasari praktik pengajaran selama PPL Terbimbing
+          sebagai ideologi perjalanan menjadi guru profesional.</p>
+      </div>
+      <div class="filosofi-layout">
+        <div class="f-sidebar">
+          <div
+            style="font-size:.7rem;font-weight:800;color:var(--blue-600);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px">
+            Nilai Inti Pengajaran</div>
+          <div class="nilai-card reveal">
+            <h4>🎯 Pembelajaran Bermakna</h4>
+            <p>Setiap aktivitas belajar harus terhubung dengan pengalaman nyata dan relevan bagi kehidupan siswa.</p>
+          </div>
+          <div class="nilai-card reveal rv1">
+            <h4>🌈 Inklusivitas</h4>
+            <p>Setiap siswa berhak mendapatkan kesempatan belajar yang setara sesuai potensi uniknya.</p>
+          </div>
+          <div class="nilai-card reveal rv2">
+            <h4>🔄 Refleksi Berkelanjutan</h4>
+            <p>Guru yang baik adalah guru yang tidak berhenti belajar dan selalu mengevaluasi diri.</p>
+          </div>
+          <div class="nilai-card reveal rv3">
+            <h4>🤝 Kemitraan Belajar</h4>
+            <p>Hubungan guru-siswa adalah kemitraan kolegial yang saling menghormati dan menginspirasi.</p>
+          </div>
+        </div>
+        <div class="f-content">
+          <div class="fpara reveal">
+            <div class="fpara-num">Paragraf 1 · Prinsip Dasar</div>
+            <p>Saya meyakini bahwa mengajar bukan sekadar mentransfer pengetahuan, melainkan sebuah proses memfasilitasi
+              pertumbuhan manusia seutuhnya. [Kembangkan prinsip dasar Anda tentang hakikat mengajar – apa yang paling
+              mendasar dalam filosofi pendidikan Anda dan mengapa Anda memiliki keyakinan tersebut berdasarkan
+              pengalaman PPL Terbimbing.]</p>
+            <div class="teori-refs">
+              <span class="teori-pill">Dewey – Learning by Doing</span>
+              <span class="teori-pill">Freire – Pedagogi Kritis</span>
+            </div>
+          </div>
+          <div class="fpara reveal rv1">
+            <div class="fpara-num">Paragraf 2 · Keyakinan tentang Siswa</div>
+            <p>Setiap siswa membawa kecerdasan, pengalaman, dan potensi yang unik ke dalam ruang kelas. [Tuliskan
+              keyakinan Anda tentang bagaimana siswa belajar, apa yang memotivasi mereka, dan bagaimana peran guru dalam
+              menumbuhkan potensi tersebut berdasarkan pengamatan selama PPL Terbimbing.]</p>
+            <div class="teori-refs">
+              <span class="teori-pill">Gardner – Multiple Intelligence</span>
+              <span class="teori-pill">Vygotsky – ZPD</span>
+            </div>
+          </div>
+          <div class="fpara reveal rv2">
+            <div class="fpara-num">Paragraf 3 · Nilai &amp; Komitmen</div>
+            <p>Perjalanan PPL Terbimbing telah mempertegas keyakinan saya bahwa menjadi guru profesional adalah sebuah
+              panggilan yang memerlukan dedikasi seumur hidup. [Uraikan nilai-nilai yang semakin menguat selama PPL,
+              komitmen yang ingin diperkuat, dan bagaimana filosofi ini akan memandu praktik mengajar ke depan menuju
+              PPL Mandiri.]</p>
+            <div class="teori-refs">
+              <span class="teori-pill">Reflective Practice – Schön</span>
+              <span class="teori-pill">Darling-Hammond</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="ft-brand">
+          <div class="ft-logo">E-Portfolio <span>PPG</span></div>
+          <p>Dokumentasi perjalanan profesional mahasiswa PPG Prajabatan melalui PPL Terbimbing — merangkum refleksi,
+            artefak, dan komitmen menjadi guru yang berdampak.</p>
+          <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+            <span
+              style="font-size:.7rem;background:rgba(74,145,247,.12);border:1px solid rgba(74,145,247,.2);color:rgba(255,255,255,.5);padding:4px 12px;border-radius:50px;font-weight:600">PPG
+              Prajabatan</span>
+            <span
+              style="font-size:.7rem;background:rgba(232,170,32,.1);border:1px solid rgba(232,170,32,.2);color:rgba(255,255,255,.5);padding:4px 12px;border-radius:50px;font-weight:600">UTS
+              · UAS · E-Portfolio</span>
+          </div>
+        </div>
+
+        <!-- Social Media -->
+        <div>
+          <div class="ft-title">Media Sosial</div>
+          <div class="socials">
+            <a href="https://instagram.com/USERNAME_ANDA" target="_blank" class="social-link">
+              <div class="social-icon si-instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </div>
+              <span>@username_instagram</span>
+            </a>
+            <a href="https://linkedin.com/in/USERNAME_ANDA" target="_blank" class="social-link">
+              <div class="social-icon si-linkedin">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </div>
+              <span>LinkedIn Profesional</span>
+            </a>
+            <a href="https://youtube.com/@USERNAME_ANDA" target="_blank" class="social-link">
+              <div class="social-icon si-youtube">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+                  <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" />
+                </svg>
+              </div>
+              <span>YouTube Channel</span>
+            </a>
+            <a href="https://twitter.com/USERNAME_ANDA" target="_blank" class="social-link">
+              <div class="social-icon si-twitter">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                </svg>
+              </div>
+              <span>@username_twitter</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Kontak Profesional -->
+        <div>
+          <div class="ft-title">Kontak Profesional</div>
+          <div class="contacts-col">
+            <div class="ct-item">
+              <div class="ct-icon">📧</div>
+              <div class="ct-info">
+                <span class="ct-label">Email</span>
+                <span class="ct-val"><a href="mailto:email@contoh.ac.id">email@contoh.ac.id</a></span>
+              </div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-icon">📱</div>
+              <div class="ct-info">
+                <span class="ct-label">WhatsApp</span>
+                <span class="ct-val"><a href="https://wa.me/6281XXXXXXXXX" target="_blank">+62 81X-XXXX-XXXX</a></span>
+              </div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-icon">📍</div>
+              <div class="ct-info">
+                <span class="ct-label">Lokasi</span>
+                <span class="ct-val">Kota, Provinsi, Indonesia</span>
+              </div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-icon">🌐</div>
+              <div class="ct-info">
+                <span class="ct-label">Website / E-Portfolio</span>
+                <span class="ct-val"><a href="#">portofolio.linkanda.id</a></span>
+              </div>
+            </div>
+            <div class="ct-item">
+              <div class="ct-icon">🎓</div>
+              <div class="ct-info">
+                <span class="ct-label">Institusi</span>
+                <span class="ct-val">Universitas/LPTK Anda</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-credits">© 2024 E-Portfolio PPG · Nama Mahasiswa · Hak Cipta Dilindungi</span>
+        <div class="footer-ppg">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+          PPG Prajabatan · PPL Terbimbing
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    /* ------ THEME TOGGLE ------ */
+    const html = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    // Load saved theme
+    const saved = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    /* ------ HAMBURGER ------ */
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+    });
+
+    /* ------ SLIDESHOW ------ */
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+    let current = 0, timer;
+    function goSlide(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      clearInterval(timer);
+      timer = setInterval(nextSlide, 5000);
+    }
+    function nextSlide() { goSlide((current + 1) % slides.length); }
+    timer = setInterval(nextSlide, 5000);
+
+    /* ------ SCROLL REVEAL ------ */
+    const revealEls = document.querySelectorAll('.reveal');
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(el => ro.observe(el));
+
+    /* ------ ARTEFAK FILTER ------ */
+    function filterArtefak(k, btn) {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.art-card').forEach(card => {
+        const show = k === 'semua' || card.dataset.k === k;
+        card.style.display = show ? 'flex' : 'none';
+      });
+    }
+
+    /* ------ ACTIVE NAV ON SCROLL ------ */
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+      });
+    });
+  </script>
+</body>
+
+</html>
