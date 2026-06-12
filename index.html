@@ -9,6 +9,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     /* ============================================================
    DESIGN TOKENS — Light & Dark
@@ -1956,6 +1957,138 @@
         text-align: center
       }
     }
+
+    /* ============================================================
+   accordion interaktif
+   ============================================================ */
+    .portfolio-accordion {
+      max-width: 1140px;
+      margin: auto;
+    }
+
+    .accordion-item {
+      width: 90%;
+      max-width: 1140px;
+      margin: 80px auto 40px auto;
+    }
+
+    .accordion-header {
+      width: 100%;
+      border: none;
+      display: flex;
+      align-items: center;
+      padding: 18px 24px;
+      border-radius: 16px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .accordion-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .7s ease;
+    }
+
+    .blue {
+      background:
+        linear-gradient(135deg,
+          #0c1d5a 0%,
+          #12308f 45%,
+          #214db7 100%);
+
+      color: white;
+
+      box-shadow:
+        0 15px 40px rgba(11, 47, 136, .25);
+    }
+
+    .gold {
+
+      background:
+        linear-gradient(135deg,
+          #f4c84a 0%,
+          #e0ac28 45%,
+          #c98d00 100%);
+
+      color: #0b2f88;
+
+      box-shadow:
+        0 15px 40px rgba(224, 172, 40, .25);
+    }
+
+    .number {
+      font-size: 38px;
+      font-weight: 700;
+      margin-right: 18px;
+    }
+
+    .accordion-title span {
+      font-size: .75rem;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      opacity: .8;
+
+    }
+
+    .accordion-title h3 {
+      font-size: 1.9rem;
+
+      font-weight: 700;
+
+      line-height: 1.2;
+
+      margin-top: 3px;
+    }
+
+    .icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+      transition: .4s;
+    }
+
+    .accordion-header.active .icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      background:
+        rgba(12, 29, 90, .08);
+
+      border:
+
+        1px solid rgba(18, 48, 143, .15);
+
+      border-radius: 0 0 18px 18px;
+    }
+
+    .accordion-content a {
+      display: block;
+      padding: 16px 24px;
+      color: #ddd;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .accordion-content a:hover {
+      background: #2a2a2a;
+    }
+
+    .chapter-break {
+      text-align: center;
+      margin: 20px 0;
+      color: #999;
+    }
+
+    .collapsed {
+      display: none;
+    }
+
+    .hidden-section {
+      display: none;
+    }
   </style>
 </head>
 
@@ -2064,8 +2197,26 @@
     </div>
   </section>
 
+  <!-- ACCORDION 01 -->
+  <div class="accordion-item">
+
+    <button class="accordion-header blue" data-target="portofolio1">
+
+      <div class="number">01</div>
+
+      <div class="accordion-title">
+        <span>E-PORTFOLIO 1 - UTS</span>
+        <h3>Refleksi Awal & Fondasi Karakter</h3>
+      </div>
+
+      <div class="icon">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+
+    </button>
+  </div>
   <!-- ================= PROFIL ================= -->
-  <section id="profil">
+  <section id="profil" class="portofolio1">
     <div class="sec-inner">
       <div class="sec-head reveal">
         <div class="sec-tag">Komponen 1</div>
@@ -2117,7 +2268,8 @@
             <h3>Asal &amp; Keunikan Daerah</h3>
             <p> Saya berasal dari Cilacap, sebuah daerah pesisir di selatan Pulau Jawa yang
               dikenal sebagai kota industri
-              sekaligus wilayah dengan kekayaan budaya dan alam yang beragam. Cilacap memiliki ikon alam berupa Pantai
+              sekaligus wilayah dengan kekayaan budaya dan alam yang beragam. Cilacap memiliki ikon alam berupa
+              Pantai
               Teluk Penyu dan Benteng Pendem yang menjadi saksi sejarah sekaligus daya tarik wisata daerah.</p>
             <p>Keunikan Cilacap terletak pada perpaduan kehidupan masyarakat pesisir yang sederhana, budaya gotong
               royong yang masih kuat, serta keberagaman masyarakat yang hidup berdampingan. Lingkungan tersebut
@@ -2132,19 +2284,23 @@
           </div>
           <div class="pblock card reveal rv2" style="padding:26px 28px">
             <h3>Inspirasi Menjadi Guru</h3>
-            <p>Keinginan saya menjadi guru terinspirasi oleh pemikiran Ki Hajar Dewantara bahwa pendidikan adalah proses
+            <p>Keinginan saya menjadi guru terinspirasi oleh pemikiran Ki Hajar Dewantara bahwa pendidikan adalah
+              proses
               menuntun peserta didik agar mampu berkembang sesuai kodrat dan potensinya. Melalui profesi guru, saya
               ingin berkontribusi dalam menciptakan pembelajaran yang bermakna, membangun karakter, serta membantu
               peserta didik menjadi pribadi yang mandiri dan berdaya.</p>
-            <p>Pengalaman saya sebagai Guru Informatika semakin menguatkan keyakinan tersebut. Dalam proses mengajar,
+            <p>Pengalaman saya sebagai Guru Informatika semakin menguatkan keyakinan tersebut. Dalam proses
+              mengajar,
               saya tidak hanya membimbing peserta didik mempelajari teknologi dan keterampilan digital, tetapi juga
               membantu mereka mengembangkan kreativitas, kemampuan berpikir kritis, serta kepercayaan diri untuk
-              menghadapi tantangan di era digital. Pengalaman tersebut menjadi motivasi bagi saya untuk terus berkembang
+              menghadapi tantangan di era digital. Pengalaman tersebut menjadi motivasi bagi saya untuk terus
+              berkembang
               menjadi guru profesional yang mampu memberikan manfaat bagi peserta didik dan lingkungan sekitar.</p>
           </div>
           <div class="pblock card reveal rv3" style="padding:26px 28px">
             <h3>Tujuan Menjadi Guru Profesional</h3>
-            <p>Tujuan saya menjadi guru profesional adalah menghadirkan pembelajaran yang bermakna, menyenangkan, dan
+            <p>Tujuan saya menjadi guru profesional adalah menghadirkan pembelajaran yang bermakna, menyenangkan,
+              dan
               relevan dengan kebutuhan peserta didik di era digital. Saya ingin menjadi guru yang tidak hanya
               menyampaikan materi pelajaran, tetapi juga membimbing siswa untuk berpikir kritis, kreatif, mampu
               memecahkan masalah, serta memiliki karakter yang baik dalam kehidupan sehari-hari.</p>
@@ -2152,12 +2308,14 @@
               secara bijak, produktif, dan bertanggung jawab. Saya percaya bahwa pendidikan tidak hanya bertujuan
               menghasilkan siswa yang cerdas secara akademik, tetapi juga membentuk generasi yang adaptif,
               berintegritas, dan siap menghadapi tantangan masa depan.</p>
-            <p>Bagi saya, keberhasilan seorang guru tidak hanya diukur dari nilai yang diperoleh siswa, tetapi juga dari
+            <p>Bagi saya, keberhasilan seorang guru tidak hanya diukur dari nilai yang diperoleh siswa, tetapi juga
+              dari
               tumbuhnya semangat belajar, karakter, dan potensi terbaik dalam diri setiap peserta didik.
             </p>
           </div>
           <div class="quote-card reveal rv4">
-            <p>"Pendidikan sejati adalah pendidikan yang mengajarkan kita untuk hidup bersama, untuk saling menghargai,
+            <p>"Pendidikan sejati adalah pendidikan yang mengajarkan kita untuk hidup bersama, untuk saling
+              menghargai,
               untuk saling membantu, untuk saling mencintai."</p>
             <cite>Ki Hajar Dewantara</cite>
           </div>
@@ -2167,7 +2325,7 @@
   </section>
 
   <!-- ================= ARTEFAK ================= -->
-  <section id="artefak">
+  <section id="artefak" class="portofolio1">
     <div class="sec-inner">
       <div class="sec-head reveal">
         <div class="sec-tag">Komponen 2</div>
@@ -2435,7 +2593,7 @@
   </section>
 
   <!-- ================= LAMPIRAN ================= -->
-  <section id="lampiran">
+  <section id="lampiran" class="portofolio1">
     <div class="sec-inner">
       <div class="sec-head reveal">
         <div class="sec-tag">Komponen 3</div>
@@ -2451,7 +2609,8 @@
             <div class="siklus-item">
               <span class="sk-badge">Siklus 1</span>
               <div>
-                <p>Penilaian terhadap RPP, LKPD, dan instrumen asesmen yang disusun mahasiswa pada siklus pertama.</p>
+                <p>Penilaian terhadap RPP, LKPD, dan instrumen asesmen yang disusun mahasiswa pada siklus pertama.
+                </p>
                 <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★☆</span><span
                     class="sk-val">85/100</span></div>
               </div>
@@ -2482,7 +2641,8 @@
             <div class="siklus-item">
               <span class="sk-badge">Siklus 1</span>
               <div>
-                <p>Evaluasi praktik mengajar perdana dengan penekanan pada penguasaan kelas dan penyampaian materi.</p>
+                <p>Evaluasi praktik mengajar perdana dengan penekanan pada penguasaan kelas dan penyampaian materi.
+                </p>
                 <div class="sk-score"><label>Nilai GP:</label><span class="stars">★★★★☆</span><span
                     class="sk-val">83/100</span></div>
               </div>
@@ -2511,7 +2671,7 @@
   </section>
 
   <!-- ================= MODEL GURU ================= -->
-  <section id="model">
+  <section id="model" class="portofolio1">
     <div class="sec-inner">
       <div class="sec-head reveal">
         <div class="sec-tag">Komponen 4</div>
@@ -2535,17 +2695,20 @@
               Karakter Guru Ideal</div>
             <div class="karakter-item reveal">
               <div class="k-dot"></div>
-              <p><strong>Reflektif &amp; Adaptif</strong> — Selalu mengkaji dan memperbaiki praktik mengajar berdasarkan
+              <p><strong>Reflektif &amp; Adaptif</strong> — Selalu mengkaji dan memperbaiki praktik mengajar
+                berdasarkan
                 bukti dan umpan balik.</p>
             </div>
             <div class="karakter-item reveal rv1">
               <div class="k-dot"></div>
-              <p><strong>Empati &amp; Inklusif</strong> — Memahami keberagaman siswa dan memastikan setiap siswa merasa
+              <p><strong>Empati &amp; Inklusif</strong> — Memahami keberagaman siswa dan memastikan setiap siswa
+                merasa
                 dihargai dan didukung.</p>
             </div>
             <div class="karakter-item reveal rv2">
               <div class="k-dot"></div>
-              <p><strong>Inovatif &amp; Kreatif</strong> — Terus berinovasi dalam metode dan media pembelajaran untuk
+              <p><strong>Inovatif &amp; Kreatif</strong> — Terus berinovasi dalam metode dan media pembelajaran
+                untuk
                 meningkatkan kualitas pengajaran.</p>
             </div>
             <div class="karakter-item reveal rv3">
@@ -2586,121 +2749,149 @@
     </div>
   </section>
 
-  <!-- ================= REFLEKSI ================= -->
-  <section id="refleksi">
-    <div class="sec-inner">
-      <div class="sec-head reveal">
-        <div class="sec-tag">E-Portfolio 2 · UAS</div>
-        <h2 class="sec-h">Refleksi Akhir <em>PPL Terbimbing</em></h2>
-        <p class="sec-desc">Analisis mendalam terhadap perjalanan, tantangan, dan pembelajaran bermakna selama PPL
-          Terbimbing dari awal hingga akhir.</p>
-      </div>
-      <div class="refleksi-grid">
-        <div class="rcard rc-belajar reveal">
-          <span class="rcard-icon">🌱</span>
-          <h3>Yang Telah Saya Pelajari</h3>
-          <ul>
-            <li>Memahami dinamika kelas nyata yang berbeda dari teori di perkuliahan</li>
-            <li>Mengembangkan fleksibilitas dalam menyesuaikan rencana pembelajaran dengan kondisi aktual</li>
-            <li>Menguasai teknik diferensiasi untuk memenuhi kebutuhan belajar yang beragam</li>
-            <li>Membangun hubungan profesional dengan guru pamong dan kolega</li>
-            <li>[Tambahkan pembelajaran bermakna lainnya]</li>
-          </ul>
-        </div>
-        <div class="rcard rc-tantangan reveal rv1">
-          <span class="rcard-icon">⚡</span>
-          <h3>Pengalaman Menantang &amp; Solusinya</h3>
-          <ul>
-            <li><strong>Tantangan:</strong> Manajemen kelas dengan beragam motivasi siswa<br><em>Solusi:</em> Gamifikasi
-              dan pembelajaran kolaboratif</li>
-            <li><strong>Tantangan:</strong> Keterbatasan waktu persiapan perangkat<br><em>Solusi:</em> Template adaptif
-              dan bank soal terstandar</li>
-            <li>[Tambahkan tantangan spesifik beserta solusinya]</li>
-          </ul>
-        </div>
-        <div class="rcard rc-saran reveal rv2">
-          <span class="rcard-icon">💬</span>
-          <h3>Umpan Balik Konstruktif</h3>
-          <ul>
-            <li>Guru pamong menyarankan peningkatan pengelolaan waktu saat diskusi kelas</li>
-            <li>DPL merekomendasikan variasi pertanyaan HOTS yang lebih beragam</li>
-            <li>Saran untuk meningkatkan keterlibatan siswa melalui teknologi lebih variatif</li>
-            <li>[Tambahkan umpan balik spesifik untuk perbaikan ke PPL Mandiri]</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ================= FILOSOFI ================= -->
-  <section id="filosofi">
-    <div class="sec-inner">
-      <div class="sec-head reveal">
-        <div class="sec-tag">E-Portfolio 2 · Filosofi</div>
-        <h2 class="sec-h">Filosofi <em>Mengajar</em></h2>
-        <p class="sec-desc">Prinsip, keyakinan, dan nilai yang mendasari praktik pengajaran selama PPL Terbimbing
-          sebagai ideologi perjalanan menjadi guru profesional.</p>
-      </div>
-      <div class="filosofi-layout">
-        <div class="f-sidebar">
-          <div
-            style="font-size:.7rem;font-weight:800;color:var(--blue-600);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px">
-            Nilai Inti Pengajaran</div>
-          <div class="nilai-card reveal">
-            <h4>🎯 Pembelajaran Bermakna</h4>
-            <p>Setiap aktivitas belajar harus terhubung dengan pengalaman nyata dan relevan bagi kehidupan siswa.</p>
-          </div>
-          <div class="nilai-card reveal rv1">
-            <h4>🌈 Inklusivitas</h4>
-            <p>Setiap siswa berhak mendapatkan kesempatan belajar yang setara sesuai potensi uniknya.</p>
-          </div>
-          <div class="nilai-card reveal rv2">
-            <h4>🔄 Refleksi Berkelanjutan</h4>
-            <p>Guru yang baik adalah guru yang tidak berhenti belajar dan selalu mengevaluasi diri.</p>
-          </div>
-          <div class="nilai-card reveal rv3">
-            <h4>🤝 Kemitraan Belajar</h4>
-            <p>Hubungan guru-siswa adalah kemitraan kolegial yang saling menghormati dan menginspirasi.</p>
-          </div>
-        </div>
-        <div class="f-content">
-          <div class="fpara reveal">
-            <div class="fpara-num">Paragraf 1 · Prinsip Dasar</div>
-            <p>Saya meyakini bahwa mengajar bukan sekadar mentransfer pengetahuan, melainkan sebuah proses memfasilitasi
-              pertumbuhan manusia seutuhnya. [Kembangkan prinsip dasar Anda tentang hakikat mengajar – apa yang paling
-              mendasar dalam filosofi pendidikan Anda dan mengapa Anda memiliki keyakinan tersebut berdasarkan
-              pengalaman PPL Terbimbing.]</p>
-            <div class="teori-refs">
-              <span class="teori-pill">Dewey – Learning by Doing</span>
-              <span class="teori-pill">Freire – Pedagogi Kritis</span>
-            </div>
-          </div>
-          <div class="fpara reveal rv1">
-            <div class="fpara-num">Paragraf 2 · Keyakinan tentang Siswa</div>
-            <p>Setiap siswa membawa kecerdasan, pengalaman, dan potensi yang unik ke dalam ruang kelas. [Tuliskan
-              keyakinan Anda tentang bagaimana siswa belajar, apa yang memotivasi mereka, dan bagaimana peran guru dalam
-              menumbuhkan potensi tersebut berdasarkan pengamatan selama PPL Terbimbing.]</p>
-            <div class="teori-refs">
-              <span class="teori-pill">Gardner – Multiple Intelligence</span>
-              <span class="teori-pill">Vygotsky – ZPD</span>
-            </div>
-          </div>
-          <div class="fpara reveal rv2">
-            <div class="fpara-num">Paragraf 3 · Nilai &amp; Komitmen</div>
-            <p>Perjalanan PPL Terbimbing telah mempertegas keyakinan saya bahwa menjadi guru profesional adalah sebuah
-              panggilan yang memerlukan dedikasi seumur hidup. [Uraikan nilai-nilai yang semakin menguat selama PPL,
-              komitmen yang ingin diperkuat, dan bagaimana filosofi ini akan memandu praktik mengajar ke depan menuju
-              PPL Mandiri.]</p>
-            <div class="teori-refs">
-              <span class="teori-pill">Reflective Practice – Schön</span>
-              <span class="teori-pill">Darling-Hammond</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
+  <!-- ACCORDION 02 -->
+  <div class="accordion-item">
+
+    <button class="accordion-header gold" data-target="portofolio2">
+
+      <div class="number">02</div>
+
+      <div class="accordion-title">
+        <span>E-PORTFOLIO 2 - UAS</span>
+        <h3>Refleksi Akhir & Filosofi Mengajar</h3>
+      </div>
+
+      <div class="icon">
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+
+    </button>
+  </div>
+
+    <!-- ================= REFLEKSI ================= -->
+    <section id="refleksi" class="portofolio2">
+      <div class="sec-inner">
+        <div class="sec-head reveal">
+          <div class="sec-tag">E-Portfolio 2 · UAS</div>
+          <h2 class="sec-h">Refleksi Akhir <em>PPL Terbimbing</em></h2>
+          <p class="sec-desc">Analisis mendalam terhadap perjalanan, tantangan, dan pembelajaran bermakna selama PPL
+            Terbimbing dari awal hingga akhir.</p>
+        </div>
+        <div class="refleksi-grid">
+          <div class="rcard rc-belajar reveal">
+            <span class="rcard-icon">🌱</span>
+            <h3>Yang Telah Saya Pelajari</h3>
+            <ul>
+              <li>Memahami dinamika kelas nyata yang berbeda dari teori di perkuliahan</li>
+              <li>Mengembangkan fleksibilitas dalam menyesuaikan rencana pembelajaran dengan kondisi aktual</li>
+              <li>Menguasai teknik diferensiasi untuk memenuhi kebutuhan belajar yang beragam</li>
+              <li>Membangun hubungan profesional dengan guru pamong dan kolega</li>
+              <li>[Tambahkan pembelajaran bermakna lainnya]</li>
+            </ul>
+          </div>
+          <div class="rcard rc-tantangan reveal rv1">
+            <span class="rcard-icon">⚡</span>
+            <h3>Pengalaman Menantang &amp; Solusinya</h3>
+            <ul>
+              <li><strong>Tantangan:</strong> Manajemen kelas dengan beragam motivasi siswa<br><em>Solusi:</em>
+                Gamifikasi
+                dan pembelajaran kolaboratif</li>
+              <li><strong>Tantangan:</strong> Keterbatasan waktu persiapan perangkat<br><em>Solusi:</em> Template
+                adaptif
+                dan bank soal terstandar</li>
+              <li>[Tambahkan tantangan spesifik beserta solusinya]</li>
+            </ul>
+          </div>
+          <div class="rcard rc-saran reveal rv2">
+            <span class="rcard-icon">💬</span>
+            <h3>Umpan Balik Konstruktif</h3>
+            <ul>
+              <li>Guru pamong menyarankan peningkatan pengelolaan waktu saat diskusi kelas</li>
+              <li>DPL merekomendasikan variasi pertanyaan HOTS yang lebih beragam</li>
+              <li>Saran untuk meningkatkan keterlibatan siswa melalui teknologi lebih variatif</li>
+              <li>[Tambahkan umpan balik spesifik untuk perbaikan ke PPL Mandiri]</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FILOSOFI ================= -->
+    <section id="filosofi" class="portofolio2">
+      <div class="sec-inner">
+        <div class="sec-head reveal">
+          <div class="sec-tag">E-Portfolio 2 · Filosofi</div>
+          <h2 class="sec-h">Filosofi <em>Mengajar</em></h2>
+          <p class="sec-desc">Prinsip, keyakinan, dan nilai yang mendasari praktik pengajaran selama PPL Terbimbing
+            sebagai ideologi perjalanan menjadi guru profesional.</p>
+        </div>
+        <div class="filosofi-layout">
+          <div class="f-sidebar">
+            <div
+              style="font-size:.7rem;font-weight:800;color:var(--blue-600);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px">
+              Nilai Inti Pengajaran</div>
+            <div class="nilai-card reveal">
+              <h4>🎯 Pembelajaran Bermakna</h4>
+              <p>Setiap aktivitas belajar harus terhubung dengan pengalaman nyata dan relevan bagi kehidupan siswa.
+              </p>
+            </div>
+            <div class="nilai-card reveal rv1">
+              <h4>🌈 Inklusivitas</h4>
+              <p>Setiap siswa berhak mendapatkan kesempatan belajar yang setara sesuai potensi uniknya.</p>
+            </div>
+            <div class="nilai-card reveal rv2">
+              <h4>🔄 Refleksi Berkelanjutan</h4>
+              <p>Guru yang baik adalah guru yang tidak berhenti belajar dan selalu mengevaluasi diri.</p>
+            </div>
+            <div class="nilai-card reveal rv3">
+              <h4>🤝 Kemitraan Belajar</h4>
+              <p>Hubungan guru-siswa adalah kemitraan kolegial yang saling menghormati dan menginspirasi.</p>
+            </div>
+          </div>
+          <div class="f-content">
+            <div class="fpara reveal">
+              <div class="fpara-num">Paragraf 1 · Prinsip Dasar</div>
+              <p>Saya meyakini bahwa mengajar bukan sekadar mentransfer pengetahuan, melainkan sebuah proses
+                memfasilitasi
+                pertumbuhan manusia seutuhnya. [Kembangkan prinsip dasar Anda tentang hakikat mengajar – apa yang
+                paling
+                mendasar dalam filosofi pendidikan Anda dan mengapa Anda memiliki keyakinan tersebut berdasarkan
+                pengalaman PPL Terbimbing.]</p>
+              <div class="teori-refs">
+                <span class="teori-pill">Dewey – Learning by Doing</span>
+                <span class="teori-pill">Freire – Pedagogi Kritis</span>
+              </div>
+            </div>
+            <div class="fpara reveal rv1">
+              <div class="fpara-num">Paragraf 2 · Keyakinan tentang Siswa</div>
+              <p>Setiap siswa membawa kecerdasan, pengalaman, dan potensi yang unik ke dalam ruang kelas. [Tuliskan
+                keyakinan Anda tentang bagaimana siswa belajar, apa yang memotivasi mereka, dan bagaimana peran guru
+                dalam
+                menumbuhkan potensi tersebut berdasarkan pengamatan selama PPL Terbimbing.]</p>
+              <div class="teori-refs">
+                <span class="teori-pill">Gardner – Multiple Intelligence</span>
+                <span class="teori-pill">Vygotsky – ZPD</span>
+              </div>
+            </div>
+            <div class="fpara reveal rv2">
+              <div class="fpara-num">Paragraf 3 · Nilai &amp; Komitmen</div>
+              <p>Perjalanan PPL Terbimbing telah mempertegas keyakinan saya bahwa menjadi guru profesional adalah
+                sebuah
+                panggilan yang memerlukan dedikasi seumur hidup. [Uraikan nilai-nilai yang semakin menguat selama PPL,
+                komitmen yang ingin diperkuat, dan bagaimana filosofi ini akan memandu praktik mengajar ke depan
+                menuju
+                PPL Mandiri.]</p>
+              <div class="teori-refs">
+                <span class="teori-pill">Reflective Practice – Schön</span>
+                <span class="teori-pill">Darling-Hammond</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   <!-- ================= FOOTER ================= -->
   <footer>
     <div class="footer-inner">
@@ -2781,7 +2972,8 @@
               <div class="ct-icon">📱</div>
               <div class="ct-info">
                 <span class="ct-label">WhatsApp</span>
-                <span class="ct-val"><a href="https://wa.me/6281XXXXXXXXX" target="_blank">+62 81X-XXXX-XXXX</a></span>
+                <span class="ct-val"><a href="https://wa.me/6281XXXXXXXXX" target="_blank">+62
+                    81X-XXXX-XXXX</a></span>
               </div>
             </div>
             <div class="ct-item">
@@ -2887,6 +3079,31 @@
         a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
       });
     });
+
+    /* ------ accordion-item ------ */
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      document.querySelectorAll(".accordion-header").forEach(header => {
+
+        let target = header.dataset.target;
+
+        header.addEventListener("click", () => {
+
+          header.classList.toggle("active");
+
+          document.querySelectorAll("." + target).forEach(section => {
+
+            section.classList.toggle("hidden-section");
+
+          });
+
+        });
+
+      });
+
+    });
+
   </script>
 </body>
 
